@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    promise.all返回一个新的promise对象,all（可迭代）
+    合并多个promise对象，等待所有同时成功（或某一个失败），做后续逻辑
+    <ul>
+
+    </ul>
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const bj = axios({ url:'http://hmajax.itheima.net/api/weather', parmas: { city:'110100' } })
+        const sh = axios({ url:'http://hmajax.itheima.net/api/weather', parmas: { city:'310100' } })
+        const gz = axios({ url:'http://hmajax.itheima.net/api/weather', parmas: { city:'440100' } })
+        const sz = axios({ url:'http://hmajax.itheima.net/api/weather', parmas: { city:'440300' } })
+        const p = Promise.all([bj,sh,gz,sz])
+        p.then( result => {
+            // 注意：结果数组顺序和合并时顺序一致
+            console.log(result)
+            
+        }).catch( error => {
+            console.dir(error)
+            
+        })
+    </script>
+</body>
+</html>

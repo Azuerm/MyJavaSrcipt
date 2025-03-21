@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    promise链式调用解决回调地狱
+    new promise里面有then()方法，依靠then()方法会返回一个新生成的promise对象，然后return返回这个新的promise对象，继续串联下一个任务，直至结束
+    <script>
+        // 1.创建promise对象,模拟请求省份名字
+        const p = new Promise( (resolve,reject) => {
+            setTimeout(() => {
+                resolve('北京市')
+            }, 2000);
+        })
+        // 2 获得省份的值
+        const p2 = p.then( result => {
+            console.log(result)
+            // 3.创建promise对象，模拟请求城市名字
+            // return Promise对象最终状态和结果，影响到新的promise对象
+            return new Promise( (reslove,reject) => {
+                setTimeout(() => {
+                    reslove(result + '---北京')
+                }, 2000)
+            })
+        })
+      /*   // then()原地的结果是一个新的promise对象
+        console.log(p2 === p)   //比较的是内存地址，false */
+        // 4.获得城市名字
+        p2.then( result => {
+            console.log(result)
+            
+            
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    事件循环EventLoop：定义：执行代码和收集异步任务的模型，在调用栈空闲，反复调用任务队列里回调函数的执行机制
+    2.为什么有事件循环？
+    >JavaScript是单线程的，为了不阻塞JS引擎，设计执行代码的模型
+    3.JavaScript内代码如何执行？
+    >
+    执行同步代码，遇到异步代码交给宿主浏览器环境执行
+    >
+    异步有了结果后，把回调函数放入任务队列排队
+    当调用栈空闲后，反复调用任务队列里的回调函数
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    axios的核心配置：url：请求url网址
+    method：请求方法，params：查询参数，data：提交数据
+    请求方法：对服务器资源执行操作 GET获得、POST提交
+    <br>
+    axios请求配置
+    url：请求url网址
+    method：'post' 请求方法，get可以省略，不区分大小写
+    data：提交数据
+    <button class="btn">注册用户</button>
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelector('.btn').addEventListener('click', function () {
+            axios({
+                url: 'http://hmajax.itheima.net/api/register',
+                // 指定请求方法
+                method: 'post',
+                // 提交数据
+                data: {
+                    username: 'hjsdoe1234h',
+                    password: '123456'
+                }
+            }).then(result => {
+                console.log(result)
+
+            })
+            // 查看response里面的属性message
+        })
+    </script>
+</body>
+
+</html>

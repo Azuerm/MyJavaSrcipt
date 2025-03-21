@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    //  axios库地址: https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js
+    // 省份数据地址: http://ajax-api.itheima.net/api/province
+    <p class="my-p"></p>
+    <!-- // 1.引入axios库 -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+    // 2.使用axios函数
+        axios({
+            url:' http://ajax-api.itheima.net/api/province'
+        }).then(result => {
+            console.log(result)
+            console.log(result.data.data)
+            document.querySelector('.my-p').innerHTML = result.data.data.join('<br>')
+        })
+        axios({
+            url:' 目标资源地址'
+        }).then(result => {
+            
+        })
+        
+    </script>
+</body>
+</html>

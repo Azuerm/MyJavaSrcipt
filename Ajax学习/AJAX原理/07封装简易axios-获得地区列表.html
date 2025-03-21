@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04.案例_地区查询</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            font-size: 15px;
+        }
+
+        body {
+            padding-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="editForm" class="row">
+            <!-- 输入省份名字 -->
+            <div class="mb-3 col">
+                <label class="form-label">省份名字</label>
+                <input type="text" value="北京" name="province" class="form-control province" placeholder="请输入省份名称" />
+            </div>
+            <!-- 输入城市名字 -->
+            <div class="mb-3 col">
+                <label class="form-label">城市名字</label>
+                <input type="text" value="北京市" name="city" class="form-control city" placeholder="请输入城市名称" />
+            </div>
+        </form>
+        <button type="button" class="btn btn-primary sel-btn">查询</button>
+        <br><br>
+        <p>地区列表: </p>
+        <ul class="list-group">
+            <!-- 示例地区 -->
+            <li class="list-group-item">东城区</li>
+        </ul>
+    </div>
+    <script>
+        function myAxios(config) {
+            return new Promise((reslove, reject) => {
+                const xhr = new XMLHttpRequest()
+                // 判断有没有params选项，携带查询参数
+                if (config.params) {
+                    const paramsobj = new URLSearchParams(config.params)
+                    const queryString = paramsobj.toString()
+                    config.url = config.url + `?${queryString}`
+                }
+                xhr.open(config.method || 'GET', config.url)
+                xhr.addEventListener('loadend', () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        reslove(JSON.parse(xhr.response))
+                    } else {
+                        reject(new Error(xhr.response))
+                    }
+                })
+                xhr.send()
+            })
+        }
+
+        document.querySelector('.sel-btn').addEventListener('click', function () {
+            const province = document.querySelector('.province')
+            const city = document.querySelector('.city')
+            console.log(province)
+            
+            myAxios({
+                url: 'http://hmajax.itheima.net/api/area',
+                params: {
+                    pname: province.value,
+                    cname: city.value
+                }
+            }).then(result => {
+                console.log(result.list)
+                const str = result.list.map(item => {
+                    return `<li class="list-group-item">${item}</li>`
+                }).join('')
+                console.log(str)
+                document.querySelector('.list-group').innerHTML = str
+            })
+        })
+
+    </script>
+
+</body>
+
+</html>

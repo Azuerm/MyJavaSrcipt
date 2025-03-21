@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn">注册用户</button>
+    <script>
+        function myAxios(config) {
+            return new Promise((reslove, reject) => {
+                if (config.params) {
+                    const paramsobj = new URLSearchParams(config.params)
+                    const querySelector = paramsobj.toString()
+                    config.url += `?${querySelector}`
+                }
+                const xhr = new XMLHttpRequest()
+                xhr.open(config.method || 'GET', config.url)
+                xhr.addEventListener('loadend', () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        reslove(JSON.parse(xhr.response))
+                    } else {
+                        reject(new Error(xhr.response))
+                    }
+                })
+                // 判断data选项
+                if (config.data) {
+                    // 转换数据类型
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                    const jsonStr = JSON.stringify(config.data)
+                    xhr.send(jsonStr)
+                } else {
+                    // 如果没有请求体，直接发送
+                    xhr.send()
+                }
+                
+            })
+        }
+        document.querySelector('button').addEventListener('click', function () {
+            myAxios({
+                url: 'http://hmajax.itheima.net/api/register',
+                method: 'post',
+                data: {
+                    username: 'xiaohuang',
+                    password: '7654321'
+                }
+            }).then(result => {
+                console.log(result.message)
+            }).catch(error => {
+                console.log(error)
+                
+            })
+        })
+    </script>
+</body>
+
+</html>

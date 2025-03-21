@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" name="" id="" class="upload">
+    <img src="" alt="" class="my-img">
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 文件选着元素->change事件
+        document.querySelector('.upload').addEventListener('change', e => {
+            // 1.获得图片文件
+            console.log(e.target.files[0])
+            // 2.使用FormData携带图片文件
+            // FormData('参数名', 值)
+            const fd = new FormData()
+            fd.append('img', e.target.files[0])
+            // 3.提交到服务器，获得图片url网址使用
+            axios({
+                url:'http://hmajax.itheima.net/api/uploadimg',
+                method: 'post',
+                data: fd
+            }).then(result => {
+                console.log(result)
+                // 取出图片url网址，用img标签加载显示
+                const imgUrl = result.data.data.url
+                document.querySelector('.my-img').src = imgUrl
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    异步任务分为：
+    宏任务：由 浏览器 环境执行的异步任务 script、settimeout、setinterval、ajax、事件
+    微任务：由 JS引擎 环境执行的异步任务 promise里面的then和catch ；promise对象，promise本身是同步，而then和catch回调函数是异步的
+    先执行 微任务 再执行 宏任务；微任务队列清空才会调用下一个宏任务
+    <br>
+    js执行过程：script标签进行宏任务，宏任务里面有 同步任务，执行完同步任务 ，执行微任务，再执行宏任务
+    <script>
+        console.log(1)
+        setTimeout(() => {
+            console.log(2)
+            // 宏任务
+        }, 0)
+        const p = new Promise((resolve, reject) => {
+            resolve(3)
+        })
+        p.then(res => {
+            console.log(res)
+            // 微任务
+        })
+        console.log(4)
+    </script>
+</body>
+
+</html>

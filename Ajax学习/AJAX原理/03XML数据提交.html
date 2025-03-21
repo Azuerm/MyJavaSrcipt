@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    核心： 请求头设置Content-Type：application/json
+    请求体携带JSON字符串
+    <button>注册用户</button>
+    <script>
+        document.querySelector('button').addEventListener('click', function () {
+            const xhr = new XMLHttpRequest()
+            xhr.open('POST', 'http://hmajax.itheima.net/api/register')
+            xhr.addEventListener('loadend', () => {
+                console.log(xhr.response)
+                const data = JSONl.parse(xhr.response)
+            })
+            // 设置请求头，告诉服务器内容类型（JSON字符串）
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            // 准备提交的数据
+            const userObj = {
+                username: 'xiaozhang',
+                password: '7654321'
+            }
+            const useStr = JSON.stringify(userObj)
+            // 设置请求体发起提交
+            xhr.send(useStr)
+        })
+    </script>
+</body>
+
+</html>

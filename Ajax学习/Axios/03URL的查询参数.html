@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    浏览器提供给服务器额外的信息，服务区提供给浏览器数据
+    <br>
+    语法：http://xxx.com/xxx/xxx?参数名1=值1&参数名2=值2
+    使用axios提供的params选项，axios在运行时，会将参数名和值拼接到 url?参数名=值
+    <p>
+        
+    </p>
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios({
+            url:' http://hmajax.itheima.net/api/city',
+            // 查询参数
+            params:{
+                pname: '四川省'
+                // 参数名(后端告知的)：值(前端自己想的)
+            }
+        }).then( result => {
+            console.log(result)
+            console.log(result.data.list)
+            document.querySelector('p').innerHTML = result.data.list.join('<br>')
+        })
+    </script>
+</body>
+</html>

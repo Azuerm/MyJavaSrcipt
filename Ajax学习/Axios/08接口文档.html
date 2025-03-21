@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    接口文档：由后端描述接口的文章
+    接口：使用ajax和服务器通讯时，使用的 URL,请求方法，以及参数
+    <br>
+    axios后面的代码会自动转JSON,再转为对象，body参数是请求体-data，query参数-查询-params
+    <button>登录</button>
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelector('button').addEventListener('click',function() {
+            // 用户登录
+            axios({
+                url:'http://hmajax.itheima.net/api/login',
+                method: 'post',
+                data: {
+                    username: 'itheima007',
+                    password: '7654321'
+                }
+            }).then( result => {
+                console.log(result)
+                
+            }).catch( error => {
+                console.log(error)
+                
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    请求报文：浏览器 按照HTTP协议要求的格式， 发送给服务器的内容
+    <br>
+    请求报文的组成：
+        1.请求行： 请求方法、URL、协议
+        2.请求头：以键值对的格式携带的附加信息，比如Content-Type
+        3.空行：分隔请求头，空行之后的是发送给服务器的资源
+        4.请求体：发送的资源
+    在网络里面的Fetch/XHR查看，名称 里面的标头-请求标头，载荷-查看请求体
+    <button class="btn">注册用户</button>
+    <script src=" https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 需求：使用axios错误处理语法，拿到报错信息，弹框反馈给用户
+        document.querySelector('.btn').addEventListener('click', function () {
+            axios({
+                url: 'http://hmajax.itheima.net/api/register',
+                // 指定请求方法
+                method: 'post',
+                // 提交数据
+                data: {
+                    username: 'hjsdoe1234h',
+                    password: '123456'
+                }
+            }).then(result => {
+                console.log(result)
+
+            }).catch(error => {
+                // 处理错误信息
+                console.log(error)
+                alert(error.response.data.message)
+            })
+
+        })
+    </script>
+</body >
+</html >

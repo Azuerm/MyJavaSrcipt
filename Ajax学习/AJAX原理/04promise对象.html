@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.创建promise对象 (pending-待定状态)
+        const p = new Promise( function(reslove,reject) {
+            // console.log('promise对象内开始执行')
+            // Promise对象创建时，这里的代码都会执行
+            
+            // 2.执行异步操作
+            setTimeout( () => {
+                // reslove() => fulfilled状态-已兑现 => then()
+                // reslove('打印成功')
+                // reject() => reject状态-已拒绝 => catch()
+                reject(new Error('打印失败'))
+                
+            },2000)
+        })
+        console.log(p)
+        
+        // 3.打印结果
+        p.then( result => {
+            console.log(result)
+            
+        }).catch( error => {
+            console.log(error)
+            
+        })
+    </script>
+</body>
+</html>
