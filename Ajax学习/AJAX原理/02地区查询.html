@@ -21,12 +21,10 @@
 <body>
     <div class="container">
         <form id="editForm" class="row">
-            <!-- 输入省份名字 -->
             <div class="mb-3 col">
                 <label class="form-label">省份名字</label>
                 <input type="text" value="北京" name="province" class="form-control province" placeholder="请输入省份名称" />
             </div>
-            <!-- 输入城市名字 -->
             <div class="mb-3 col">
                 <label class="form-label">城市名字</label>
                 <input type="text" value="北京市" name="city" class="form-control city" placeholder="请输入城市名称" />
@@ -61,7 +59,7 @@
                 const str = data.list.map(item => {
                     return `<li class="list-group-item">${item}</li>`
                 }).join('')
-                
+
                 document.querySelector('.list-group').innerHTML = str
             })
             xhr.send()
