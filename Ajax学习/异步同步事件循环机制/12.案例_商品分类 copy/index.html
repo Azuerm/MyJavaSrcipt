@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例_分类导航</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <!-- 大容器 -->
+    <div class="container">
+        <div class="sub-list">
+            <div class="item">
+                <h3>分类名字</h3>
+                <ul>
+                    <li>
+                        <a href="javascript:;">
+                            <img
+                                src="https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1659552792,3869332496&fm=253&gp=0.jpg" />
+                            <p>巧克力</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <img
+                                src="https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1659552792,3869332496&fm=253&gp=0.jpg" />
+                            <p>巧克力</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <img
+                                src="https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1659552792,3869332496&fm=253&gp=0.jpg" />
+                            <p>巧克力</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- url: 'http://hmajax.itheima.net/api/category/sub' -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function get(config) {
+            const { data: oneArray } = await axios({ url: 'http://hmajax.itheima.net/api/category/top' })
+
+            const two = oneArray.data.map(item1 => {
+                return axios({
+                    url: 'http://hmajax.itheima.net/api/category/sub',
+                    params: {
+                        id: item1.id
+                    }
+                })
+            })
+
+            const p = await Promise.all(two)
+            const str = p.map(item => {
+                const { data } = item.data
+                return `<div class="item">
+                            <h3>${data.name}</h3>
+                            <ul>
+                                ${data.children.map(_item => {
+                    return `<li>
+                                    <a href="javascript:;">
+                                        <img
+                                            src="${_item.picture}" />
+                                        <p>${_item.name}</p>
+                                    </a>
+                                </li>`
+                }).join('')}
+                            </ul>
+                        </div>`
+            }).join('')
+            document.querySelector('.sub-list').innerHTML = str
+
+
+
+        }
+
+
+        get()
+
+        console.log('asios', axios({
+            url: 'http://hmajax.itheima.net/api/category/top'
+        }));
+
+    </script>
+</body>
+
+</html>
