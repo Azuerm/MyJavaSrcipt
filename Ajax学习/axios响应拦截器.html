@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    axios响应拦截器，在then、catch之前，触发的拦截函数，对响应结果统一处理
+    什么时候触发失败/成功的回调函数？通过状态 2xx触发成功回调，其他则触发失败的回调函数
+    <script>
+        axios.interceptors.response.use(
+            function (response) {
+                // 对响应数据做些什么
+                console.log('响应拦截器 - 收到响应', response);
+                return response;
+            },
+            function (error) {
+                // 对响应错误做些什么
+                console.log('响应拦截器 - 响应错误', error);
+                return Promise.reject(error);
+            }
+        );
+    </script>
+</body>
+
+</html>

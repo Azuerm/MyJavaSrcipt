@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    设置一些公共的属性
+    axios请求拦截器：发起请求之前，触发的配置函数，对请求参数进行额外配置
+    <!-- 如每次在请求之前代码里面 自动加上 token，告诉服务器我的身份 -->
+     <br>
+    什么是axios请求拦截器？发起请求之前，调用的一个函数，对请求参数请进设置
+    什么时候使用：有公共配置和设置时，统一设置在请求拦截器中
+    <script>
+        axios.interceptors.request.use(
+            function (config) {
+                // 在发送请求之前做些什么
+                console.log('请求拦截器 - 请求发送前', config);
+
+                // 例如，添加认证信息
+                config.headers.Authorization = 'Bearer your_token_here';
+
+                return config;
+            },
+            function (error) {
+                // 对请求错误做些什么
+                return Promise.reject(error);
+            }
+        );
+    </script>
+</body>
+
+</html>
